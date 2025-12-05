@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'car_details.dart';
 
 void main() {
   runApp(const CarRentalApp());
@@ -42,13 +43,24 @@ class CarListScreen extends StatelessWidget {
         separatorBuilder: (_, __) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
           final car = cars[index];
+
           return Card(
             elevation: 2,
             child: ListTile(
               title: Text(car['name']!),
               subtitle: Text(car['price']!),
               trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CarDetailsScreen(
+                      name: car['name']!,
+                      price: car['price']!,
+                    ),
+                  ),
+                );
+              },
             ),
           );
         },
