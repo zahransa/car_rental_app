@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'booking_screen.dart';
 
 class CarDetailsScreen extends StatelessWidget {
   final String name;
@@ -37,12 +38,24 @@ class CarDetailsScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 30),
+
+            // --- CORRECT BUTTON ---
             ElevatedButton(
               onPressed: () {
-                // booking screen will come later
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BookingScreen(
+                      carName: name,
+                      pricePerDay: price,
+                    ),
+                  ),
+                );
               },
               child: const Text('Book Now'),
             ),
+            // -----------------------
+
           ],
         ),
       ),
