@@ -1,16 +1,49 @@
-# car_rental_app
+# Car Rental App 🚗
 
-A new Flutter project.
+A simple **Flutter car rental application** I built while learning mobile development.  
+The app lets users browse available cars, view details with photos, and fill a booking form.
 
-## Getting Started
+This project is part of my portfolio to show my progress in **Flutter** and **mobile app development**.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Car list screen**
+  - Shows available cars with name and daily price
+  - Clean Material 3 UI using Flutter
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Car details screen**
+  - Large header image for each car
+  - Car name and price
+  - **“Book Now”** button to open a booking form
+
+- **Booking screen**
+  - Pick-up and return date using date pickers
+  - User name and phone number fields
+  - Basic form validation
+  - Confirmation dialog summarizing the booking
+
+---
+
+## 🛠 Tech Stack
+
+- **Framework:** Flutter
+- **Language:** Dart
+- **Platforms:** Windows (desktop), Android (future)
+- **IDE:** VS Code + Android Studio (SDK / emulator)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter installed (stable channel)  
+- Android Studio (for Android SDK) or just Flutter desktop support
+- Git
+
+Check your setup:
+
+```bash
+flutter doctor
