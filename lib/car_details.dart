@@ -4,11 +4,13 @@ import 'booking_screen.dart';
 class CarDetailsScreen extends StatelessWidget {
   final String name;
   final String price;
+  final String imageUrl;
 
   const CarDetailsScreen({
     super.key,
     required this.name,
     required this.price,
+    required this.imageUrl,
   });
 
   @override
@@ -22,24 +24,44 @@ class CarDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // ---------- CAR IMAGE ----------
             Container(
               height: 200,
               width: double.infinity,
-              color: Colors.grey.shade300,
-              child: const Icon(Icons.directions_car, size: 100),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.grey.shade200,
+              ),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) =>
+                    const Icon(Icons.directions_car, size: 80),
+              ),
             ),
+            // --------------------------------
+
             const SizedBox(height: 20),
+
             Text(
               name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+
             Text(
               price,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
+
             const SizedBox(height: 30),
 
-            // --- CORRECT BUTTON ---
+            // ---------- BOOK NOW BUTTON ----------
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -54,8 +76,7 @@ class CarDetailsScreen extends StatelessWidget {
               },
               child: const Text('Book Now'),
             ),
-            // -----------------------
-
+            // ---------------------------------------
           ],
         ),
       ),

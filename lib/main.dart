@@ -27,10 +27,29 @@ class CarListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cars = [
-      {'name': 'Toyota Corolla', 'price': '45 €/day'},
-      {'name': 'Volkswagen Golf', 'price': '55 €/day'},
-      {'name': 'BMW 3 Series', 'price': '90 €/day'},
-    ];
+  {
+    'name': 'Toyota Corolla',
+    'price': '45 €/day',
+    'imageUrl':
+        'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+  },
+  {
+    'name': 'Volkswagen Golf',
+    'price': '55 €/day',
+    'imageUrl':
+        'https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg',
+  },
+  {
+    'name': 'BMW 3 Series',
+    'price': '90 €/day',
+    'imageUrl':
+        'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+  },
+];
+
+    
+
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -57,6 +76,7 @@ class CarListScreen extends StatelessWidget {
                     builder: (_) => CarDetailsScreen(
                       name: car['name']!,
                       price: car['price']!,
+                      imageUrl: car['imageUrl']!,
                     ),
                   ),
                 );
