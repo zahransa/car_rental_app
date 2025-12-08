@@ -1,4 +1,7 @@
+// lib/main.dart
+
 import 'package:flutter/material.dart';
+import 'car.dart';
 import 'car_details.dart';
 
 void main() {
@@ -25,142 +28,149 @@ class CarRentalApp extends StatelessWidget {
 class CarListScreen extends StatelessWidget {
   const CarListScreen({super.key});
 
+  // ---------- Demo data ----------
+  List<Car> get cars => const [
+        Car(
+          name: 'Toyota Corolla',
+          pricePerDay: 45,
+          location: 'Düsseldorf, Germany',
+          imagePath: 'assets/images/hyundai.jpg',
+          fuelType: 'Petrol',
+          transmission: 'Automatic',
+          seats: 5,
+          description:
+              'Comfortable and reliable car, perfect for city trips and weekend getaways. '
+              'Clean interior, air conditioning, Bluetooth, and modern safety features.',
+        ),
+        Car(
+          name: 'Volkswagen Golf',
+          pricePerDay: 55,
+          location: 'Düsseldorf, Germany',
+          imagePath: 'assets/images/kia.jpg',
+          fuelType: 'Petrol',
+          transmission: 'Automatic',
+          seats: 5,
+          description:
+              'Popular hatchback with great handling, ideal for both city driving and longer trips. '
+              'Good fuel economy and spacious interior.',
+        ),
+        Car(
+          name: 'BMW 3 Series',
+          pricePerDay: 90,
+          location: 'Düsseldorf, Germany',
+          imagePath: 'assets/images/mercedes.jpg',
+          fuelType: 'Petrol',
+          transmission: 'Automatic',
+          seats: 5,
+          description:
+              'Premium sedan with powerful engine, high comfort and advanced driver-assistance systems '
+              'for long journeys.',
+        ),
+      ];
+
   @override
   Widget build(BuildContext context) {
-    final cars = [
-      {
-        'name': 'Toyota Corolla',
-        'price': '45 €/day',
-        'imagePath': 'assets/images/hyundai.jpg',
-      },
-      {
-        'name': 'Volkswagen Golf',
-        'price': '55 €/day',
-        'imagePath': 'assets/images/kia.jpg',
-      },
-      {
-        'name': 'BMW 3 Series',
-        'price': '90 €/day',
-        'imagePath': 'assets/images/mercedes.jpg',
-      },
-    ];
-
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F4F6),
       appBar: AppBar(
         title: const Text('Available Cars'),
         centerTitle: true,
       ),
-      body: Padding(
+      body: ListView.separated(
         padding: const EdgeInsets.all(16),
-        child: ListView.separated(
-          itemCount: cars.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 12),
-          itemBuilder: (context, index) {
-            final car = cars[index];
+        itemCount: cars.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 16),
+        itemBuilder: (context, index) {
+          final car = cars[index];
 
-            return InkWell(
+          return Card(
+            elevation: 2,
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
+            ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(12),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  car.imagePath,
+                  width: 80,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              title: Text(
+                car.name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(Icons.location_on, size: 14),
+                      const SizedBox(width: 4),
+                      Flexible(
+                        child: Text(
+                          car.location,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      const Icon(Icons.local_gas_station, size: 16),
+                      const SizedBox(width: 4),
+                      Text(car.fuelType),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.settings, size: 16),
+                      const SizedBox(width: 4),
+                      Text(car.transmission),
+                      const SizedBox(width: 12),
+                      const Icon(Icons.event_seat, size: 16),
+                      const SizedBox(width: 4),
+                      Text('${car.seats} seats'),
+                    ],
+                  ),
+                ],
+              ),
+              isThreeLine: true,
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    car.formattedPricePerDay,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    'per day',
+                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                ],
+              ),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => CarDetailsScreen(
-                      name: car['name']!,
-                      price: car['price']!,
-                      imagePath: car['imagePath']!,
-                    ),
+                    builder: (_) => CarDetailsScreen(car: car),
                   ),
                 );
               },
-              child: Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Row(
-                    children: [
-                      // Thumbnail image
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Image.asset(
-                          car['imagePath']!,
-                          width: 110,
-                          height: 70,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-
-                      // Car info
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              car['name']!,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  size: 16,
-                                  color: Colors.grey,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  'Düsseldorf, Germany',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // Price
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            car['price']!,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'per day',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // later: open "Add new car" form
-        },
+        onPressed: () {},
         icon: const Icon(Icons.add),
         label: const Text('Add Car'),
       ),
