@@ -27,35 +27,25 @@ class CarListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cars = [
-  {
-    'name': 'Toyota Corolla',
-    'price': '45 €/day',
-    'imagePath': 'assets/images/hyundai.jpg',
-    
-  },
-  {
-    'name': 'Volkswagen Golf',
-    'price': '55 €/day',
-    'imagePath': 'assets/images/kia.jpg',
-    
-  },
-  {
-    'name': 'BMW 3 Series',
-    'price': '90 €/day',
-    'imagePath': 'assets/images/mercedes.jpg',
-   
-  },
-];
-
-    
-
-    
+      {
+        'name': 'Toyota Corolla',
+        'price': '45 €/day',
+        'imagePath': 'assets/images/hyundai.jpg',
+      },
+      {
+        'name': 'Volkswagen Golf',
+        'price': '55 €/day',
+        'imagePath': 'assets/images/kia.jpg',
+      },
+      {
+        'name': 'BMW 3 Series',
+        'price': '90 €/day',
+        'imagePath': 'assets/images/mercedes.jpg',
+      },
+    ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Available Cars'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Available Cars'), centerTitle: true),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: cars.length,
@@ -66,6 +56,15 @@ class CarListScreen extends StatelessWidget {
           return Card(
             elevation: 2,
             child: ListTile(
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  car['imagePath']!,
+                  width: 80,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
+              ),
               title: Text(car['name']!),
               subtitle: Text(car['price']!),
               trailing: const Icon(Icons.arrow_forward_ios),
