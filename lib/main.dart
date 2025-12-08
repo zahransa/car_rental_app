@@ -30,20 +30,20 @@ class CarListScreen extends StatelessWidget {
   {
     'name': 'Toyota Corolla',
     'price': '45 €/day',
-    'imageUrl':
-        'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+    'imagePath': 'assets/images/hyundai.jpg',
+    
   },
   {
     'name': 'Volkswagen Golf',
     'price': '55 €/day',
-    'imageUrl':
-        'https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg',
+    'imagePath': 'assets/images/kia.jpg',
+    
   },
   {
     'name': 'BMW 3 Series',
     'price': '90 €/day',
-    'imageUrl':
-        'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+    'imagePath': 'assets/images/mercedes.jpg',
+   
   },
 ];
 
@@ -76,7 +76,7 @@ class CarListScreen extends StatelessWidget {
                     builder: (_) => CarDetailsScreen(
                       name: car['name']!,
                       price: car['price']!,
-                      imageUrl: car['imageUrl']!,
+                      imagePath: car['imagePath']!,
                     ),
                   ),
                 );

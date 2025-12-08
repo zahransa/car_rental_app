@@ -4,13 +4,13 @@ import 'booking_screen.dart';
 class CarDetailsScreen extends StatelessWidget {
   final String name;
   final String price;
-  final String imageUrl;
+  final String imagePath;
 
   const CarDetailsScreen({
     super.key,
     required this.name,
     required this.price,
-    required this.imageUrl,
+    required this.imagePath,
   });
 
   @override
@@ -19,65 +19,62 @@ class CarDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(name),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ---------- CAR IMAGE ----------
-            Container(
-              height: 200,
-              width: double.infinity,
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              // ---------- IMPROVED IMAGE BANNER ----------
+              ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                color: Colors.grey.shade200,
-              ),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
-                    const Icon(Icons.directions_car, size: 80),
-              ),
-            ),
-            // --------------------------------
-
-            const SizedBox(height: 20),
-
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            Text(
-              price,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            // ---------- BOOK NOW BUTTON ----------
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BookingScreen(
-                      carName: name,
-                      pricePerDay: price,
-                    ),
+                child: AspectRatio(
+                  aspectRatio: 16 / 6, // standard banner
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
                   ),
-                );
-              },
-              child: const Text('Book Now'),
-            ),
-            // ---------------------------------------
-          ],
+                ),
+              ),
+              // -------------------------------------------
+
+              const SizedBox(height: 20),
+
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              Text(
+                price,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.black54,
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BookingScreen(
+                        carName: name,
+                        pricePerDay: price,
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('Book Now'),
+              ),
+            ],
+          ),
         ),
       ),
     );
